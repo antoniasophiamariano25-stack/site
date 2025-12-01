@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Links Rápidos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            background: #0a0e27;
+            position: relative;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding: 20px;
+            padding-bottom: 80px;
+        }
+
+        /* Fundo Astral Animado */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Constelações e círculos astrais */
+        .astral-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.15;
+        }
+
+        .zodiac-circle {
+            animation: rotate 60s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .clock {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(20, 20, 50, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            border-radius: 15px;
+            border: 2px solid rgba(147, 112, 219, 0.5);
+            box-shadow: 0 8px 32px rgba(147, 112, 219, 0.3);
+            z-index: 100;
+        }
+
+        .time {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(147, 112, 219, 0.8);
+        }
+
+        .date {
+            font-size: 14px;
+            color: rgba(200, 180, 255, 0.9);
+            margin-top: 5px;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 30px;
+            font-size: 42px;
+            text-shadow: 0 0 20px rgba(147, 112, 219, 0.8);
+        }
+
+        .links-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: nowrap;
+            max-width: 1400px;
+        }
+
+        .link-card {
+            background: rgba(20, 20, 50, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 2px solid rgba(147, 112, 219, 0.3);
+            box-shadow: 0 4px 20px rgba(147, 112, 219, 0.2);
+            text-decoration: none;
+            width: 150px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(147, 112, 219, 0.3) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .link-card:hover::before {
+            animation: ripple 1.5s ease-out infinite;
+            opacity: 1;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .link-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            border-color: rgba(147, 112, 219, 0.9);
+            box-shadow: 0 15px 50px rgba(147, 112, 219, 0.6);
+            background: rgba(30, 30, 60, 0.9);
+        }
+
+        .link-card:hover .icon {
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        .link-card:hover .link-name {
+            text-shadow: 0 0 15px rgba(147, 112, 219, 1);
+        }
+
+        .icon {
+            width: 55px;
+            height: 55px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.6s ease;
+        }
+
+        .icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .link-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(147, 112, 219, 0.5);
+            transition: text-shadow 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .clock {
+                top: 15px;
+                right: 15px;
+                padding: 10px 15px;
+            }
+
+            .time {
+                font-size: 18px;
+            }
+
+            h1 {
+                font-size: 28px;
+                margin-bottom: 30px;
+            }
+
+            .links-grid {
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            .link-card {
+                width: 120px;
+                padding: 20px;
+            }
+
+            .icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .link-name {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Estrelas -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Círculos Astrais -->
+    <div class="astral-bg">
+        <svg width="100%" height="100%" style="position: absolute;">
+            <defs>
+                <radialGradient id="gradient1">
+                    <stop offset="0%" style="stop-color:rgb(147,112,219);stop-opacity:0.3" />
+                    <stop offset="100%" style="stop-color:rgb(75,0,130);stop-opacity:0" />
+                </radialGradient>
+            </defs>
+            <circle cx="50%" cy="50%" r="200" fill="none" stroke="rgba(147,112,219,0.2)" stroke-width="2" class="zodiac-circle"/>
+            <circle cx="50%" cy="50%" r="300" fill="none" stroke="rgba(147,112,219,0.15)" stroke-width="1" class="zodiac-circle" style="animation-duration: 80s;"/>
+            <circle cx="50%" cy="50%" r="400" fill="none" stroke="rgba(147,112,219,0.1)" stroke-width="1" class="zodiac-circle" style="animation-duration: 100s; animation-direction: reverse;"/>
+            
+            <!-- Linhas de constelação -->
+            <line x1="30%" y1="20%" x2="70%" y2="40%" stroke="rgba(147,112,219,0.3)" stroke-width="1"/>
+            <line x1="40%" y1="15%" x2="60%" y2="65%" stroke="rgba(147,112,219,0.3)" stroke-width="1"/>
+            <line x1="20%" y1="50%" x2="80%" y2="50%" stroke="rgba(147,112,219,0.2)" stroke-width="1"/>
+            
+            <!-- Estrelas de constelação -->
+            <circle cx="30%" cy="20%" r="3" fill="rgba(255,215,0,0.6)"/>
+            <circle cx="70%" cy="40%" r="3" fill="rgba(255,215,0,0.6)"/>
+            <circle cx="40%" cy="15%" r="2" fill="rgba(255,215,0,0.5)"/>
+            <circle cx="60%" cy="65%" r="2" fill="rgba(255,215,0,0.5)"/>
+        </svg>
+    </div>
+
+    <!-- Relógio -->
+    <div class="clock">
+        <div class="time" id="time">00:00:00</div>
+        <div class="date" id="date">Segunda-feira, 1 de Janeiro</div>
+    </div>
+
+    <!-- Container Principal -->
+    <div class="container">
+        <h1>✨ Meus Links Rápidos ✨</h1>
+        
+        <div class="links-grid">
+            <!-- WhatsApp -->
+            <a href="https://web.whatsapp.com/" target="_blank" class="link-card">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="#25D366">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                </div>
+                <div class="link-name">WhatsApp</div>
+            </a>
+
+            <!-- Google Classroom -->
+            <a href="https://classroom.google.com/" target="_blank" class="link-card">
+                <div class="icon">
+                    <svg viewBox="0 0 200 200" fill="none">
+                        <!-- Fundo Amarelo -->
+                        <rect width="200" height="200" fill="#F9AB00"/>
+                        <!-- Quadro Verde -->
+                        <rect x="18" y="30" width="164" height="120" rx="2" fill="#0F9D58"/>
+                        <!-- Barra Branca Inferior -->
+                        <rect x="118" y="160" width="64" height="12" rx="1" fill="white"/>
+                        <!-- Pessoa Principal (Centro) -->
+                        <circle cx="100" cy="75" r="18" fill="white"/>
+                        <ellipse cx="100" cy="115" rx="25" ry="20" fill="white"/>
+                        <!-- Pessoa Esquerda -->
+                        <circle cx="60" cy="80" r="12" fill="white" opacity="0.7"/>
+                        <ellipse cx="60" cy="110" rx="16" ry="13" fill="white" opacity="0.7"/>
+                        <!-- Pessoa Direita -->
+                        <circle cx="140" cy="80" r="12" fill="white" opacity="0.7"/>
+                        <ellipse cx="140" cy="110" rx="16" ry="13" fill="white" opacity="0.7"/>
+                    </svg>
+                </div>
+                <div class="link-name">Classroom</div>
+            </a>
+
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/" target="_blank" class="link-card">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="#fff">
+                        <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/>
+                    </svg>
+                </div>
+                <div class="link-name">TikTok</div>
+            </a>
+
+            <!-- Spotify -->
+            <a href="https://open.spotify.com/" target="_blank" class="link-card">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="#1DB954">
+                        <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                    </svg>
+                </div>
+                <div class="link-name">Spotify</div>
+            </a>
+
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/" target="_blank" class="link-card">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="#FF0000">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                </div>
+                <div class="link-name">YouTube</div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Criar estrelas
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numberOfStars = 200;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                const size = Math.random() * 2 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Atualizar relógio
+        function updateClock() {
+            const now = new Date();
+            
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
+            
+            const days = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+            const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+            
+            const dayName = days[now.getDay()];
+            const day = now.getDate();
+            const month = months[now.getMonth()];
+            
+            document.getElementById('date').textContent = `${dayName}, ${day} de ${month}`;
+        }
+
+        // Inicializar
+        createStars();
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
+</body>
+</html>
