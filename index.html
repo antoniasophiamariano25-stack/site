@@ -17,9 +17,6 @@
             background: #0a0e27;
             position: relative;
             overflow-x: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             padding: 20px;
         }
 
@@ -49,11 +46,12 @@
         /* Sistema Solar */
         .solar-system {
             position: fixed;
-            top: 50%;
+            top: 120px;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translateX(-50%);
             width: calc(100vw - 40px);
-            height: 120px;
+            max-width: 900px;
+            height: 100px;
             pointer-events: none;
             display: flex;
             flex-direction: row;
@@ -83,8 +81,8 @@
         }
 
         .sun {
-            width: 80px;
-            height: 80px;
+            width: 60px;
+            height: 60px;
             background: radial-gradient(circle at 35% 35%, #fff4e6, #ffd43b, #fab005);
             border-radius: 50%;
             box-shadow: 0 0 60px rgba(255, 212, 59, 0.8), 0 0 100px rgba(255, 212, 59, 0.4);
@@ -98,24 +96,24 @@
 
         .planet-wrapper1 { animation-delay: 0s; }
         .planet1 {
-            width: 25px;
-            height: 25px;
+            width: 20px;
+            height: 20px;
             background: radial-gradient(circle at 30% 30%, #adb5bd, #6c757d);
             box-shadow: inset -5px -5px 15px rgba(0, 0, 0, 0.5), 0 0 20px rgba(173, 181, 189, 0.3);
         }
 
         .planet-wrapper2 { animation-delay: 0.5s; }
         .planet2 {
-            width: 38px;
-            height: 38px;
+            width: 30px;
+            height: 30px;
             background: radial-gradient(circle at 30% 30%, #ffe8cc, #ffa94d, #fd7e14);
             box-shadow: inset -8px -8px 20px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 169, 77, 0.4);
         }
 
         .planet-wrapper3 { animation-delay: 1s; }
         .planet3 {
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             background: radial-gradient(circle at 30% 30%, #91d5ff, #4dabf7, #1971c2);
             box-shadow: inset -8px -8px 20px rgba(0, 0, 0, 0.4), 0 0 35px rgba(77, 171, 247, 0.5);
         }
@@ -134,16 +132,16 @@
 
         .planet-wrapper4 { animation-delay: 1.5s; }
         .planet4 {
-            width: 35px;
-            height: 35px;
+            width: 28px;
+            height: 28px;
             background: radial-gradient(circle at 30% 30%, #ffa8a8, #ff6b6b, #c92a2a);
             box-shadow: inset -7px -7px 18px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 107, 107, 0.4);
         }
 
         .planet-wrapper5 { animation-delay: 2s; }
         .planet5 {
-            width: 70px;
-            height: 70px;
+            width: 55px;
+            height: 55px;
             background:
                 linear-gradient(0deg, transparent 20%, rgba(255, 255, 255, 0.1) 21%, transparent 22%),
                 linear-gradient(0deg, transparent 45%, rgba(139, 97, 84, 0.3) 46%, transparent 47%),
@@ -155,8 +153,8 @@
         .planet5::before {
             content: '';
             position: absolute;
-            width: 20px;
-            height: 20px;
+            width: 15px;
+            height: 15px;
             background: radial-gradient(circle, #ff9980, #ff6b6b);
             border-radius: 50%;
             top: 30%;
@@ -166,8 +164,8 @@
 
         .planet-wrapper6 { animation-delay: 2.5s; }
         .planet6 {
-            width: 60px;
-            height: 60px;
+            width: 48px;
+            height: 48px;
             background: radial-gradient(circle at 35% 35%, #f9e4b7, #e6c889, #c9a96e);
             box-shadow: inset -12px -12px 30px rgba(0, 0, 0, 0.4), 0 0 45px rgba(230, 200, 137, 0.4);
         }
@@ -175,9 +173,9 @@
         .planet6::before {
             content: '';
             position: absolute;
-            width: 110px;
-            height: 110px;
-            border: 6px solid rgba(230, 200, 137, 0.4);
+            width: 90px;
+            height: 90px;
+            border: 5px solid rgba(230, 200, 137, 0.4);
             border-radius: 50%;
             top: 50%;
             left: 50%;
@@ -188,9 +186,9 @@
         .planet6::after {
             content: '';
             position: absolute;
-            width: 130px;
-            height: 130px;
-            border: 4px solid rgba(230, 200, 137, 0.2);
+            width: 110px;
+            height: 110px;
+            border: 3px solid rgba(230, 200, 137, 0.2);
             border-radius: 50%;
             top: 50%;
             left: 50%;
@@ -365,11 +363,13 @@
             text-align: center;
             width: 100%;
             max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 250px;
         }
 
         h1 {
             color: #fff;
-            margin-bottom: 30px;
+            margin-bottom: 50px;
             font-size: 42px;
             text-shadow: 0 0 20px rgba(147, 112, 219, 0.8);
         }
@@ -500,21 +500,60 @@
 
         @media (max-width: 768px) {
             .solar-system {
+                top: 100px;
                 height: 80px;
                 width: calc(100vw - 20px);
             }
 
             .sun {
-                width: 50px;
-                height: 50px;
+                width: 40px;
+                height: 40px;
             }
 
-            .planet1, .planet2, .planet3, .planet4 {
-                transform: scale(0.7);
+            .planet1 {
+                width: 15px;
+                height: 15px;
             }
 
-            .planet5, .planet6 {
-                transform: scale(0.6);
+            .planet2 {
+                width: 22px;
+                height: 22px;
+            }
+
+            .planet3 {
+                width: 24px;
+                height: 24px;
+            }
+
+            .planet4 {
+                width: 20px;
+                height: 20px;
+            }
+
+            .planet5 {
+                width: 40px;
+                height: 40px;
+            }
+
+            .planet6 {
+                width: 35px;
+                height: 35px;
+            }
+
+            .planet6::before {
+                width: 65px;
+                height: 65px;
+                border: 3px solid rgba(230, 200, 137, 0.4);
+            }
+
+            .planet6::after {
+                width: 80px;
+                height: 80px;
+                border: 2px solid rgba(230, 200, 137, 0.2);
+            }
+
+            .container {
+                padding-top: 200px;
             }
 
             .clock {
@@ -533,6 +572,7 @@
 
             h1 {
                 font-size: 28px;
+                margin-bottom: 30px;
             }
 
             .links-grid {
@@ -695,3 +735,121 @@
             document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
            
             const days = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+            const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+           
+            const dayName = days[now.getDay()];
+            const day = now.getDate();
+            const month = months[now.getMonth()];
+           
+            document.getElementById('date').textContent = `${dayName}, ${day} de ${month}`;
+        }
+
+        // Modal
+        function openModal() {
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+            document.getElementById('linkName').value = '';
+            document.getElementById('linkUrl').value = '';
+            document.getElementById('linkEmoji').value = '';
+        }
+
+        // Adicionar link
+        function addLink() {
+            const name = document.getElementById('linkName').value.trim();
+            const url = document.getElementById('linkUrl').value.trim();
+            const emoji = document.getElementById('linkEmoji').value.trim() || '🔗';
+
+            if (!name || !url) {
+                alert('Por favor, preencha o nome e a URL!');
+                return;
+            }
+
+            try {
+                new URL(url);
+            } catch (e) {
+                alert('Por favor, insira uma URL válida!');
+                return;
+            }
+
+            const link = {
+                id: Date.now(),
+                name: name,
+                url: url,
+                emoji: emoji
+            };
+
+            links.push(link);
+            renderLinks();
+            closeModal();
+        }
+
+        // Remover link
+        function removeLink(id, event) {
+            event.preventDefault();
+            event.stopPropagation();
+           
+            if (confirm('Deseja realmente remover este link?')) {
+                links = links.filter(link => link.id !== id);
+                renderLinks();
+            }
+        }
+
+        // Renderizar links
+        function renderLinks() {
+            const grid = document.getElementById('linksGrid');
+           
+            grid.innerHTML = links.map(link => {
+                const isImage = link.emoji.startsWith('http');
+                const iconContent = isImage
+                    ? `<img src="${escapeHtml(link.emoji)}" alt="${escapeHtml(link.name)}">`
+                    : escapeHtml(link.emoji);
+               
+                return `
+                    <a href="${escapeHtml(link.url)}" target="_blank" class="link-card">
+                        <button class="delete-btn" onclick="removeLink(${link.id}, event)">×</button>
+                        <div class="icon">${iconContent}</div>
+                        <div class="link-name">${escapeHtml(link.name)}</div>
+                    </a>
+                `;
+            }).join('');
+        }
+
+        // Escapar HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Fechar modal com ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Fechar modal clicando fora
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Enter para adicionar
+        document.getElementById('linkUrl').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addLink();
+            }
+        });
+
+        // Inicializar
+        createStars();
+        updateClock();
+        setInterval(updateClock, 1000);
+        renderLinks();
+    </script>
+</body>
+</html>
