@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meus Links Rápidos</title>
+    <title>Meus Apps</title>
     <style>
         * {
             margin: 0;
@@ -17,6 +17,9 @@
             background: #0a0e27;
             position: relative;
             overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
         }
 
@@ -28,7 +31,6 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 0;
         }
 
         .star {
@@ -43,160 +45,480 @@
             50% { opacity: 1; }
         }
 
-        /* Sistema Solar */
-        .solar-system {
+        /* Círculos Astrais */
+        .astral-bg {
             position: fixed;
-            top: 120px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.15;
+        }
+
+        .zodiac-circle {
+            animation: rotate 60s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Naves Espaciais */
+        .ufo {
+            position: fixed;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .ufo1 {
+            top: 20%;
+            left: 15%;
+            animation: flyUFO1 25s linear infinite;
+        }
+
+        .ufo2 {
+            top: 40%;
+            right: 10%;
+            animation: flyUFO2 30s linear infinite;
+        }
+
+        .ufo3 {
+            bottom: 30%;
+            left: 20%;
+            animation: hoverUFO 8s ease-in-out infinite;
+        }
+
+        @keyframes flyUFO1 {
+            0% { transform: translate(0, 0) scale(0.3); opacity: 0; }
+            10% { opacity: 1; }
+            50% { transform: translate(400px, -100px) scale(0.5); }
+            90% { opacity: 1; }
+            100% { transform: translate(800px, -200px) scale(0.2); opacity: 0; }
+        }
+
+        @keyframes flyUFO2 {
+            0% { transform: translate(0, 0) scale(0.2); opacity: 0; }
+            10% { opacity: 1; }
+            50% { transform: translate(-500px, 150px) scale(0.6); }
+            90% { opacity: 1; }
+            100% { transform: translate(-1000px, 300px) scale(0.3); opacity: 0; }
+        }
+
+        @keyframes hoverUFO {
+            0%, 100% { transform: translateY(0px) rotate(-5deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .ufo-body {
+            width: 60px;
+            height: 20px;
+            background: linear-gradient(to bottom, #9b9b9b, #6b6b6b);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: relative;
+            box-shadow: 0 0 20px rgba(139, 195, 255, 0.6), inset 0 -5px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .ufo-dome {
+            width: 30px;
+            height: 15px;
+            background: radial-gradient(circle at 50% 30%, rgba(139, 195, 255, 0.8), rgba(69, 162, 255, 0.4));
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: absolute;
+            top: -8px;
             left: 50%;
             transform: translateX(-50%);
-            width: calc(100vw - 40px);
-            max-width: 900px;
-            height: 100px;
-            pointer-events: none;
+            box-shadow: 0 0 15px rgba(139, 195, 255, 0.8);
+        }
+
+        .ufo-lights {
             display: flex;
-            flex-direction: row;
-            justify-content: space-evenly;
-            align-items: center;
-            z-index: 1;
+            justify-content: space-around;
+            position: absolute;
+            bottom: 2px;
+            width: 100%;
+            padding: 0 8px;
         }
 
-        .planet-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .planet {
-            position: relative;
+        .ufo-light {
+            width: 4px;
+            height: 4px;
             border-radius: 50%;
-            pointer-events: none;
-            box-shadow: inset -10px -10px 40px rgba(0, 0, 0, 0.5);
+            animation: blinkLight 1s infinite;
         }
 
-        .sun {
-            width: 60px;
-            height: 60px;
-            background: radial-gradient(circle at 35% 35%, #fff4e6, #ffd43b, #fab005);
-            border-radius: 50%;
-            box-shadow: 0 0 60px rgba(255, 212, 59, 0.8), 0 0 100px rgba(255, 212, 59, 0.4);
-            animation: pulse 4s ease-in-out infinite;
+        .ufo-light:nth-child(1) { 
+            background: #ff6b6b; 
+            animation-delay: 0s;
+        }
+        .ufo-light:nth-child(2) { 
+            background: #51cf66;
+            animation-delay: 0.3s;
+        }
+        .ufo-light:nth-child(3) { 
+            background: #4dabf7;
+            animation-delay: 0.6s;
         }
 
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 60px rgba(255, 212, 59, 0.8), 0 0 100px rgba(255, 212, 59, 0.4); }
-            50% { box-shadow: 0 0 80px rgba(255, 212, 59, 1), 0 0 120px rgba(255, 212, 59, 0.6); }
+        @keyframes blinkLight {
+            0%, 100% { opacity: 1; box-shadow: 0 0 8px currentColor; }
+            50% { opacity: 0.3; box-shadow: 0 0 2px currentColor; }
         }
 
-        .planet-wrapper1 { animation-delay: 0s; }
-        .planet1 {
-            width: 20px;
-            height: 20px;
-            background: radial-gradient(circle at 30% 30%, #adb5bd, #6c757d);
-            box-shadow: inset -5px -5px 15px rgba(0, 0, 0, 0.5), 0 0 20px rgba(173, 181, 189, 0.3);
+        .ufo-beam {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-top: 60px solid rgba(139, 195, 255, 0.2);
+            animation: beam 2s ease-in-out infinite;
         }
 
-        .planet-wrapper2 { animation-delay: 0.5s; }
-        .planet2 {
-            width: 30px;
+        @keyframes beam {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Nave Controlável */
+        .player-ship {
+            position: fixed;
+            width: 80px;
+            height: 80px;
+            z-index: 50;
+            cursor: move;
+            transition: transform 0.1s ease-out;
+        }
+
+        .player-ship-body {
+            width: 80px;
             height: 30px;
-            background: radial-gradient(circle at 30% 30%, #ffe8cc, #ffa94d, #fd7e14);
-            box-shadow: inset -8px -8px 20px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 169, 77, 0.4);
+            background: linear-gradient(to bottom, #6c9bd1, #4a7ba7);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: relative;
+            box-shadow: 0 0 30px rgba(108, 155, 209, 0.8), inset 0 -8px 15px rgba(0, 0, 0, 0.5);
         }
 
-        .planet-wrapper3 { animation-delay: 1s; }
-        .planet3 {
-            width: 32px;
-            height: 32px;
-            background: radial-gradient(circle at 30% 30%, #91d5ff, #4dabf7, #1971c2);
-            box-shadow: inset -8px -8px 20px rgba(0, 0, 0, 0.4), 0 0 35px rgba(77, 171, 247, 0.5);
-        }
-
-        .planet3::after {
-            content: '';
+        .player-ship-dome {
+            width: 40px;
+            height: 20px;
+            background: radial-gradient(circle at 50% 30%, rgba(139, 195, 255, 0.9), rgba(69, 162, 255, 0.5));
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
             position: absolute;
-            width: 60%;
-            height: 60%;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            top: 10%;
-            left: 10%;
-            filter: blur(3px);
-        }
-
-        .planet-wrapper4 { animation-delay: 1.5s; }
-        .planet4 {
-            width: 28px;
-            height: 28px;
-            background: radial-gradient(circle at 30% 30%, #ffa8a8, #ff6b6b, #c92a2a);
-            box-shadow: inset -7px -7px 18px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 107, 107, 0.4);
-        }
-
-        .planet-wrapper5 { animation-delay: 2s; }
-        .planet5 {
-            width: 55px;
-            height: 55px;
-            background:
-                linear-gradient(0deg, transparent 20%, rgba(255, 255, 255, 0.1) 21%, transparent 22%),
-                linear-gradient(0deg, transparent 45%, rgba(139, 97, 84, 0.3) 46%, transparent 47%),
-                linear-gradient(0deg, transparent 70%, rgba(255, 255, 255, 0.1) 71%, transparent 72%),
-                radial-gradient(circle at 35% 35%, #f1c6a0, #d4a574, #b8864f);
-            box-shadow: inset -15px -15px 35px rgba(0, 0, 0, 0.5), 0 0 50px rgba(209, 159, 116, 0.4);
-        }
-
-        .planet5::before {
-            content: '';
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background: radial-gradient(circle, #ff9980, #ff6b6b);
-            border-radius: 50%;
-            top: 30%;
-            left: 25%;
-            box-shadow: 0 0 15px rgba(255, 107, 107, 0.6);
-        }
-
-        .planet-wrapper6 { animation-delay: 2.5s; }
-        .planet6 {
-            width: 48px;
-            height: 48px;
-            background: radial-gradient(circle at 35% 35%, #f9e4b7, #e6c889, #c9a96e);
-            box-shadow: inset -12px -12px 30px rgba(0, 0, 0, 0.4), 0 0 45px rgba(230, 200, 137, 0.4);
-        }
-
-        .planet6::before {
-            content: '';
-            position: absolute;
-            width: 90px;
-            height: 90px;
-            border: 5px solid rgba(230, 200, 137, 0.4);
-            border-radius: 50%;
-            top: 50%;
+            top: -12px;
             left: 50%;
-            transform: translate(-50%, -50%) rotateX(75deg);
-            box-shadow: 0 0 20px rgba(230, 200, 137, 0.3);
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px rgba(139, 195, 255, 0.9);
         }
 
-        .planet6::after {
-            content: '';
+        .player-ship-lights {
+            display: flex;
+            justify-content: space-around;
             position: absolute;
-            width: 110px;
-            height: 110px;
-            border: 3px solid rgba(230, 200, 137, 0.2);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotateX(75deg);
+            bottom: 3px;
+            width: 100%;
+            padding: 0 12px;
         }
 
-        /* Relógio */
-        .clock {
+        .player-ship-light {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            animation: blinkLight 0.8s infinite;
+        }
+
+        .capture-beam {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-top: 80px solid rgba(139, 255, 195, 0.4);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .capture-beam.active {
+            opacity: 1;
+            animation: captureBeam 0.5s ease-in-out infinite;
+        }
+
+        @keyframes captureBeam {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Feedback Visual */
+        .screen-flash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(157, 255, 157, 0.3);
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0;
+            animation: flashScreen 0.3s ease-out;
+        }
+
+        @keyframes flashScreen {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .point-popup {
+            position: fixed;
+            font-size: 32px;
+            font-weight: bold;
+            color: #9dff9d;
+            text-shadow: 0 0 20px rgba(157, 255, 157, 1);
+            pointer-events: none;
+            z-index: 998;
+            animation: floatUp 1s ease-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(1.5);
+            }
+        }
+
+        .capture-particle {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: #9dff9d;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 997;
+            box-shadow: 0 0 10px #9dff9d;
+        }
+
+        @keyframes explodeParticle {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) scale(0);
+            }
+        }
+
+        .ship-shake {
+            animation: shake 0.3s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-5px, 2px) rotate(-2deg); }
+            50% { transform: translate(5px, -2px) rotate(2deg); }
+            75% { transform: translate(-3px, 1px) rotate(-1deg); }
+        }
+
+        /* Tela de Comemoração */
+        .victory-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .victory-title {
+            font-size: 64px;
+            font-weight: bold;
+            color: #ffd43b;
+            text-shadow: 0 0 30px rgba(255, 212, 59, 1);
+            margin-bottom: 30px;
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .victory-message {
+            font-size: 32px;
+            color: #9dff9d;
+            text-shadow: 0 0 20px rgba(157, 255, 157, 0.8);
+            text-align: center;
+            max-width: 600px;
+            line-height: 1.5;
+            margin-bottom: 40px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .victory-stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .victory-star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkleVictory 1.5s infinite;
+        }
+
+        @keyframes twinkleVictory {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        .victory-rocket {
+            font-size: 80px;
+            animation: rocketFly 2s ease-in-out infinite;
+            margin: 20px;
+        }
+
+        @keyframes rocketFly {
+            0%, 100% { transform: translateY(0) rotate(-45deg); }
+            50% { transform: translateY(-30px) rotate(-45deg); }
+        }
+
+        .continue-button {
+            padding: 20px 40px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5);
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .continue-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.8);
+        }
+
+        /* ET fugindo */
+        .alien.fleeing {
+            transition: all 0.3s ease-out !important;
+        }
+
+        /* ETs Flutuantes */
+        .alien {
+            position: fixed;
+            width: 50px;
+            height: 70px;
+            z-index: 40;
+            animation: floatAlien 4s ease-in-out infinite;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .alien.captured {
+            animation: suckedIn 1s ease-in forwards;
+        }
+
+        @keyframes suckedIn {
+            0% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0.1) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes floatAlien {
+            0%, 100% { transform: translateY(0px) rotate(-5deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+
+        .alien-head {
+            width: 40px;
+            height: 50px;
+            background: radial-gradient(circle at 40% 30%, #9dff9d, #5ec95e);
+            border-radius: 50% 50% 45% 45%;
+            position: relative;
+            margin: 0 auto;
+            box-shadow: 0 0 20px rgba(94, 201, 94, 0.6);
+        }
+
+        .alien-eye {
+            width: 12px;
+            height: 18px;
+            background: radial-gradient(circle, #000, #333);
+            border-radius: 50%;
+            position: absolute;
+            top: 15px;
+        }
+
+        .alien-eye.left {
+            left: 8px;
+        }
+
+        .alien-eye.right {
+            right: 8px;
+        }
+
+        .alien-body {
+            width: 30px;
+            height: 25px;
+            background: radial-gradient(circle at 50% 30%, #9dff9d, #5ec95e);
+            border-radius: 40% 40% 50% 50%;
+            margin: -5px auto 0;
+            box-shadow: 0 5px 15px rgba(94, 201, 94, 0.4);
+        }
+
+        .alien-arm {
+            width: 20px;
+            height: 8px;
+            background: #5ec95e;
+            border-radius: 50%;
+            position: absolute;
+            top: 50px;
+        }
+
+        .alien-arm.left {
+            left: 5px;
+            transform: rotate(-30deg);
+        }
+
+        .alien-arm.right {
+            right: 5px;
+            transform: rotate(30deg);
+        }
+
+        /* Score */
+        .score {
             position: fixed;
             top: 30px;
             right: 30px;
@@ -204,9 +526,109 @@
             backdrop-filter: blur(10px);
             padding: 15px 25px;
             border-radius: 15px;
+            border: 2px solid rgba(94, 201, 94, 0.5);
+            box-shadow: 0 8px 32px rgba(94, 201, 94, 0.3);
+            z-index: 100;
+            text-align: center;
+        }
+
+        .score-label {
+            font-size: 14px;
+            color: rgba(157, 255, 157, 0.9);
+            margin-bottom: 5px;
+        }
+
+        .score-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #9dff9d;
+            text-shadow: 0 0 10px rgba(157, 255, 157, 0.8);
+        }
+
+        .instructions {
+            position: fixed;
+            top: 125px;
+            right: 30px;
+            background: rgba(20, 20, 50, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            border-radius: 15px;
             border: 2px solid rgba(147, 112, 219, 0.5);
             box-shadow: 0 8px 32px rgba(147, 112, 219, 0.3);
             z-index: 100;
+            max-width: 200px;
+        }
+
+        .instructions-text {
+            font-size: 12px;
+            color: rgba(200, 180, 255, 0.9);
+            line-height: 1.5;
+        }
+
+        /* Botão de Toggle do Jogo */
+        .game-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(20, 20, 50, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            border-radius: 15px;
+            border: 2px solid rgba(94, 201, 94, 0.5);
+            box-shadow: 0 8px 32px rgba(94, 201, 94, 0.3);
+            z-index: 100;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .game-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 40px rgba(94, 201, 94, 0.5);
+            border-color: rgba(94, 201, 94, 0.8);
+        }
+
+        .game-toggle-text {
+            font-size: 16px;
+            font-weight: bold;
+            color: #9dff9d;
+            text-shadow: 0 0 10px rgba(157, 255, 157, 0.8);
+        }
+
+        .game-toggle.off {
+            border-color: rgba(255, 107, 107, 0.5);
+            box-shadow: 0 8px 32px rgba(255, 107, 107, 0.3);
+        }
+
+        .game-toggle.off:hover {
+            box-shadow: 0 12px 40px rgba(255, 107, 107, 0.5);
+            border-color: rgba(255, 107, 107, 0.8);
+        }
+
+        .game-toggle.off .game-toggle-text {
+            color: #ff6b6b;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.8);
+        }
+
+        /* Esconder elementos do jogo */
+        .game-hidden {
+            display: none !important;
+        }
+            font-size: 12px;
+            color: rgba(200, 180, 255, 0.9);
+            line-height: 1.5;
+        }
+
+        .clock {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: rgba(20, 20, 50, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            border-radius: 15px;
+            border: 2px solid rgba(147, 112, 219, 0.5);
+            box-shadow: 0 8px 32px rgba(147, 112, 219, 0.3);
+            z-index: 1000;
         }
 
         .time {
@@ -222,141 +644,6 @@
             margin-top: 5px;
         }
 
-        /* Botão Adicionar */
-        .add-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            color: white;
-            font-size: 32px;
-            cursor: pointer;
-            box-shadow: 0 5px 25px rgba(102, 126, 234, 0.5);
-            transition: all 0.3s;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .add-btn:hover {
-            transform: scale(1.1) rotate(90deg);
-            box-shadow: 0 8px 35px rgba(102, 126, 234, 0.7);
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: rgba(20, 20, 50, 0.95);
-            padding: 40px;
-            border-radius: 20px;
-            border: 2px solid rgba(147, 112, 219, 0.5);
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .modal-title {
-            color: #fff;
-            font-size: 24px;
-            text-shadow: 0 0 10px rgba(147, 112, 219, 0.8);
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 32px;
-            cursor: pointer;
-            opacity: 0.7;
-            transition: opacity 0.3s;
-        }
-
-        .close-btn:hover {
-            opacity: 1;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            color: rgba(200, 180, 255, 0.9);
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid rgba(147, 112, 219, 0.3);
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            color: #fff;
-            font-size: 16px;
-            transition: all 0.3s;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: rgba(147, 112, 219, 0.8);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .form-group input::placeholder {
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.5);
-        }
-
-        /* Container */
         .container {
             position: relative;
             z-index: 10;
@@ -364,39 +651,186 @@
             width: 100%;
             max-width: 1400px;
             margin: 0 auto;
-            padding-top: 250px;
         }
 
         h1 {
             color: #fff;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
             font-size: 42px;
             text-shadow: 0 0 20px rgba(147, 112, 219, 0.8);
+            letter-spacing: 2px;
+        }
+
+        /* Planetas */
+        .planets-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 40px;
+            flex-wrap: nowrap;
+            width: 100%;
+        }
+
+        .planet {
+            border-radius: 50%;
+            box-shadow: inset -5px -5px 20px rgba(0, 0, 0, 0.5);
+            animation: rotatePlanet 10s linear infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes rotatePlanet {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Sol */
+        .sun {
+            width: 90px;
+            height: 90px;
+            background: radial-gradient(circle at 35% 35%, #fff4e6, #ffd43b, #fab005);
+            box-shadow: 0 0 60px rgba(255, 212, 59, 0.8), 0 0 80px rgba(255, 212, 59, 0.4), inset -7px -7px 20px rgba(0, 0, 0, 0.3);
+            animation: pulse 4s ease-in-out infinite, rotatePlanet 20s linear infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 60px rgba(255, 212, 59, 0.8), 0 0 80px rgba(255, 212, 59, 0.4), inset -7px -7px 20px rgba(0, 0, 0, 0.3); }
+            50% { box-shadow: 0 0 70px rgba(255, 212, 59, 1), 0 0 100px rgba(255, 212, 59, 0.6), inset -7px -7px 20px rgba(0, 0, 0, 0.3); }
+        }
+
+        /* Mercúrio */
+        .mercury {
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle at 30% 30%, #adb5bd, #6c757d);
+            box-shadow: inset -5px -5px 15px rgba(0, 0, 0, 0.5), 0 0 22px rgba(173, 181, 189, 0.3);
+            animation-duration: 8s;
+        }
+
+        /* Vênus */
+        .venus {
+            width: 55px;
+            height: 55px;
+            background: radial-gradient(circle at 30% 30%, #ffe8cc, #ffa94d, #fd7e14);
+            box-shadow: inset -7px -7px 20px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 169, 77, 0.4);
+            animation-duration: 12s;
+        }
+
+        /* Terra */
+        .earth {
+            width: 62px;
+            height: 62px;
+            background: radial-gradient(circle at 30% 30%, #91d5ff, #4dabf7, #1971c2);
+            box-shadow: inset -7px -7px 22px rgba(0, 0, 0, 0.4), 0 0 35px rgba(77, 171, 247, 0.5);
+            animation-duration: 10s;
+            position: relative;
+        }
+
+        .earth::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 60%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            top: 10%;
+            left: 10%;
+            filter: blur(2px);
+        }
+
+        /* Marte */
+        .mars {
+            width: 48px;
+            height: 48px;
+            background: radial-gradient(circle at 30% 30%, #ffa8a8, #ff6b6b, #c92a2a);
+            box-shadow: inset -6px -6px 18px rgba(0, 0, 0, 0.5), 0 0 28px rgba(255, 107, 107, 0.4);
+            animation-duration: 9s;
+        }
+
+        /* Júpiter */
+        .jupiter {
+            width: 105px;
+            height: 105px;
+            background: 
+                linear-gradient(0deg, transparent 20%, rgba(255, 255, 255, 0.1) 21%, transparent 22%),
+                linear-gradient(0deg, transparent 45%, rgba(139, 97, 84, 0.3) 46%, transparent 47%),
+                linear-gradient(0deg, transparent 70%, rgba(255, 255, 255, 0.1) 71%, transparent 72%),
+                radial-gradient(circle at 35% 35%, #f1c6a0, #d4a574, #b8864f);
+            box-shadow: inset -15px -15px 35px rgba(0, 0, 0, 0.5), 0 0 45px rgba(209, 159, 116, 0.4);
+            animation-duration: 15s;
+            position: relative;
+        }
+
+        .jupiter::before {
+            content: '';
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            background: radial-gradient(circle, #ff9980, #ff6b6b);
+            border-radius: 50%;
+            top: 30%;
+            left: 25%;
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.6);
+        }
+
+        /* Saturno */
+        .saturn {
+            width: 85px;
+            height: 85px;
+            background: radial-gradient(circle at 35% 35%, #f9e4b7, #e6c889, #c9a96e);
+            box-shadow: inset -12px -12px 30px rgba(0, 0, 0, 0.4), 0 0 40px rgba(230, 200, 137, 0.4);
+            animation-duration: 14s;
+            position: relative;
+        }
+
+        .saturn-ring {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 7px solid rgba(230, 200, 137, 0.5);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotateX(75deg);
+            box-shadow: 0 0 20px rgba(230, 200, 137, 0.3);
+        }
+
+        .saturn-ring-outer {
+            position: absolute;
+            width: 172px;
+            height: 172px;
+            border: 5px solid rgba(230, 200, 137, 0.3);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotateX(75deg);
         }
 
         .links-grid {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 30px;
-            flex-wrap: wrap;
+            gap: 35px;
+            flex-wrap: nowrap;
+            max-width: 100%;
+            width: 100%;
         }
 
         .link-card {
             background: rgba(20, 20, 50, 0.7);
             backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 20px 30px;
+            border-radius: 25px;
+            padding: 30px 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             transition: all 0.4s ease;
             cursor: pointer;
             border: 2px solid rgba(147, 112, 219, 0.3);
             box-shadow: 0 4px 20px rgba(147, 112, 219, 0.2);
             text-decoration: none;
-            width: 150px;
+            width: 180px;
             position: relative;
             overflow: hidden;
         }
@@ -445,117 +879,29 @@
         }
 
         .icon {
-            width: 55px;
-            height: 55px;
+            width: 70px;
+            height: 70px;
             flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: transform 0.6s ease;
-            font-size: 40px;
         }
 
-        .icon img {
+        .icon svg {
             width: 100%;
             height: 100%;
-            object-fit: contain;
         }
 
         .link-name {
-            font-size: 16px;
+            font-size: 19px;
             font-weight: 600;
             color: #fff;
             text-shadow: 0 0 10px rgba(147, 112, 219, 0.5);
             transition: text-shadow 0.3s ease;
-            word-break: break-word;
-        }
-
-        .delete-btn {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            background: rgba(255, 0, 0, 0.7);
-            border: none;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            opacity: 0;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .link-card:hover .delete-btn {
-            opacity: 1;
-        }
-
-        .delete-btn:hover {
-            background: rgba(255, 0, 0, 1);
-            transform: scale(1.2);
         }
 
         @media (max-width: 768px) {
-            .solar-system {
-                top: 100px;
-                height: 80px;
-                width: calc(100vw - 20px);
-            }
-
-            .sun {
-                width: 40px;
-                height: 40px;
-            }
-
-            .planet1 {
-                width: 15px;
-                height: 15px;
-            }
-
-            .planet2 {
-                width: 22px;
-                height: 22px;
-            }
-
-            .planet3 {
-                width: 24px;
-                height: 24px;
-            }
-
-            .planet4 {
-                width: 20px;
-                height: 20px;
-            }
-
-            .planet5 {
-                width: 40px;
-                height: 40px;
-            }
-
-            .planet6 {
-                width: 35px;
-                height: 35px;
-            }
-
-            .planet6::before {
-                width: 65px;
-                height: 65px;
-                border: 3px solid rgba(230, 200, 137, 0.4);
-            }
-
-            .planet6::after {
-                width: 80px;
-                height: 80px;
-                border: 2px solid rgba(230, 200, 137, 0.2);
-            }
-
-            .container {
-                padding-top: 200px;
-            }
-
             .clock {
                 top: 15px;
                 right: 15px;
@@ -566,10 +912,6 @@
                 font-size: 18px;
             }
 
-            .date {
-                font-size: 12px;
-            }
-
             h1 {
                 font-size: 28px;
                 margin-bottom: 30px;
@@ -577,29 +919,27 @@
 
             .links-grid {
                 gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            .planets-container {
+                gap: 20px;
+                flex-wrap: wrap;
+                margin-bottom: 30px;
             }
 
             .link-card {
                 width: 120px;
-                padding: 15px 20px;
+                padding: 20px;
             }
 
             .icon {
-                width: 45px;
-                height: 45px;
-                font-size: 32px;
+                width: 50px;
+                height: 50px;
             }
 
             .link-name {
                 font-size: 14px;
-            }
-
-            .add-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 28px;
-                bottom: 20px;
-                right: 20px;
             }
         }
     </style>
@@ -608,102 +948,183 @@
     <!-- Estrelas -->
     <div class="stars" id="stars"></div>
 
-    <!-- Sistema Solar -->
-    <div class="solar-system">
-        <div class="sun"></div>
-        <div class="planet-wrapper planet-wrapper1">
-            <div class="planet planet1"></div>
-        </div>
-        <div class="planet-wrapper planet-wrapper2">
-            <div class="planet planet2"></div>
-        </div>
-        <div class="planet-wrapper planet-wrapper3">
-            <div class="planet planet3"></div>
-        </div>
-        <div class="planet-wrapper planet-wrapper4">
-            <div class="planet planet4"></div>
-        </div>
-        <div class="planet-wrapper planet-wrapper5">
-            <div class="planet planet5"></div>
-        </div>
-        <div class="planet-wrapper planet-wrapper6">
-            <div class="planet planet6"></div>
+    <!-- Naves Espaciais (OVNIs) -->
+    <div class="ufo ufo1">
+        <div class="ufo-body">
+            <div class="ufo-dome"></div>
+            <div class="ufo-lights">
+                <div class="ufo-light"></div>
+                <div class="ufo-light"></div>
+                <div class="ufo-light"></div>
+            </div>
         </div>
     </div>
 
+    <div class="ufo ufo2">
+        <div class="ufo-body">
+            <div class="ufo-dome"></div>
+            <div class="ufo-lights">
+                <div class="ufo-light"></div>
+                <div class="ufo-light"></div>
+                <div class="ufo-light"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ufo ufo3">
+        <div class="ufo-body">
+            <div class="ufo-dome"></div>
+            <div class="ufo-lights">
+                <div class="ufo-light"></div>
+                <div class="ufo-light"></div>
+                <div class="ufo-light"></div>
+            </div>
+            <div class="ufo-beam"></div>
+        </div>
+    </div>
+
+    <!-- Círculos Astrais -->
+    <div class="astral-bg">
+        <svg width="100%" height="100%" style="position: absolute;">
+            <circle cx="50%" cy="50%" r="200" fill="none" stroke="rgba(147,112,219,0.2)" stroke-width="2" class="zodiac-circle"/>
+            <circle cx="50%" cy="50%" r="300" fill="none" stroke="rgba(147,112,219,0.15)" stroke-width="1" class="zodiac-circle" style="animation-duration: 80s;"/>
+            <circle cx="50%" cy="50%" r="400" fill="none" stroke="rgba(147,112,219,0.1)" stroke-width="1" class="zodiac-circle" style="animation-duration: 100s; animation-direction: reverse;"/>
+            
+            <!-- Linhas de constelação -->
+            <line x1="30%" y1="20%" x2="70%" y2="40%" stroke="rgba(147,112,219,0.3)" stroke-width="1"/>
+            <line x1="40%" y1="15%" x2="60%" y2="65%" stroke="rgba(147,112,219,0.3)" stroke-width="1"/>
+            <line x1="20%" y1="50%" x2="80%" y2="50%" stroke="rgba(147,112,219,0.2)" stroke-width="1"/>
+            
+            <!-- Estrelas de constelação -->
+            <circle cx="30%" cy="20%" r="3" fill="rgba(255,215,0,0.6)"/>
+            <circle cx="70%" cy="40%" r="3" fill="rgba(255,215,0,0.6)"/>
+            <circle cx="40%" cy="15%" r="2" fill="rgba(255,215,0,0.5)"/>
+            <circle cx="60%" cy="65%" r="2" fill="rgba(255,215,0,0.5)"/>
+        </svg>
+    </div>
+
     <!-- Relógio -->
-    <div class="clock">
+    <div class="clock" style="position: fixed !important; top: 10px !important; left: 10px !important;">
         <div class="time" id="time">00:00:00</div>
         <div class="date" id="date">Segunda-feira, 1 de Janeiro</div>
     </div>
 
-    <!-- Botão Adicionar -->
-    <button class="add-btn" onclick="openModal()">+</button>
+    <!-- Score -->
+    <div class="score game-element">
+        <div class="score-label">ETs Capturados</div>
+        <div class="score-value" id="scoreValue">0</div>
+    </div>
 
-    <!-- Modal -->
-    <div class="modal" id="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title">✨ Adicionar Link</div>
-                <button class="close-btn" onclick="closeModal()">×</button>
-            </div>
-            <div class="form-group">
-                <label for="linkName">Nome do Link</label>
-                <input type="text" id="linkName" placeholder="Ex: YouTube, GitHub...">
-            </div>
-            <div class="form-group">
-                <label for="linkUrl">URL</label>
-                <input type="url" id="linkUrl" placeholder="https://exemplo.com">
-            </div>
-            <div class="form-group">
-                <label for="linkEmoji">Emoji ou URL da Logo (opcional)</label>
-                <input type="text" id="linkEmoji" placeholder="🎵 ou https://...">
-            </div>
-            <button class="btn-submit" onclick="addLink()">Adicionar</button>
+    <!-- Instruções -->
+    <div class="instructions game-element">
+        <div class="instructions-text">
+            🎮 Mova o mouse para controlar a nave<br>
+            👽 Clique nos ETs para capturá-los!<br>
+            🚀 Use a barra de espaço para ativar o raio
         </div>
     </div>
 
+    <!-- Botão Toggle Jogo -->
+    <div class="game-toggle" id="gameToggle">
+        <div class="game-toggle-text" id="gameToggleText">🎮 Iniciar Jogo</div>
+    </div>
+
+    <!-- Nave Controlável -->
+    <div class="player-ship game-element" id="playerShip">
+        <div class="player-ship-body">
+            <div class="player-ship-dome"></div>
+            <div class="player-ship-lights">
+                <div class="player-ship-light" style="background: #ff6b6b;"></div>
+                <div class="player-ship-light" style="background: #51cf66;"></div>
+                <div class="player-ship-light" style="background: #4dabf7;"></div>
+            </div>
+        </div>
+        <div class="capture-beam" id="captureBeam"></div>
+    </div>
+
+    <!-- Container de ETs -->
+    <div id="aliensContainer"></div>
+
     <!-- Container Principal -->
     <div class="container">
-        <h1>✨ Meus Links Rápidos ✨</h1>
-        <div class="links-grid" id="linksGrid"></div>
+        <!-- Planetas -->
+        <div class="planets-container">
+            <div class="planet sun"></div>
+            <div class="planet mercury"></div>
+            <div class="planet venus"></div>
+            <div class="planet earth"></div>
+            <div class="planet mars"></div>
+            <div class="planet jupiter"></div>
+            <div class="planet saturn">
+                <div class="saturn-ring"></div>
+                <div class="saturn-ring-outer"></div>
+            </div>
+        </div>
+
+        <h1>✨ Meus Apps ✨</h1>
+        
+        <div class="links-grid">
+            <!-- WhatsApp -->
+            <a href="https://web.whatsapp.com/" target="_blank" class="link-card">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="#25D366">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                </div>
+                <div class="link-name">WhatsApp</div>
+            </a>
+
+            <!-- Google Classroom -->
+            <a href="https://classroom.google.com/" target="_blank" class="link-card">
+                <div class="icon">
+                    <svg viewBox="0 0 200 200" fill="none">
+                        <rect width="200" height="200" fill="#F9AB00"/>
+                        <rect x="18" y="30" width="164" height="120" rx="2" fill="#0F9D58"/>
+                        <rect x="118" y="160" width="64" height="12" rx="1" fill="white"/>
+                        <circle cx="100" cy="75" r="18" fill="white"/>
+                        <ellipse cx="100" cy="115" rx="25" ry="20" fill="white"/>
+                        <circle cx="60" cy="80" r="12" fill="white" opacity="0.7"/>
+                        <ellipse cx="60" cy="110" rx="16" ry="13" fill="white" opacity="0.7"/>
+                        <circle cx="140" cy="80" r="12" fill="white" opacity="0.7"/>
+                        <ellipse cx="140" cy="110" rx="16" ry="13" fill="white" opacity="0.7"/>
+                    </svg>
+                </div>
+                <div class="link-name">Classroom</div>
+            </a>
+
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/" target="_blank" class="link-card">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="#fff">
+                        <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/>
+                    </svg>
+                </div>
+                <div class="link-name">TikTok</div>
+            </a>
+
+            <!-- Spotify -->
+            <a href="https://open.spotify.com/" target="_blank" class="link-card">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="#1DB954">
+                        <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                    </svg>
+                </div>
+                <div class="link-name">Spotify</div>
+            </a>
+
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/" target="_blank" class="link-card">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="#FF0000">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                </div>
+                <div class="link-name">YouTube</div>
+            </a>
+        </div>
     </div>
 
     <script>
-        // Estado dos links
-        let links = [
-            {
-                id: 1,
-                name: 'WhatsApp',
-                url: 'https://web.whatsapp.com/',
-                emoji: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg'
-            },
-            {
-                id: 2,
-                name: 'Classroom',
-                url: 'https://classroom.google.com/',
-                emoji: 'https://ssl.gstatic.com/classroom/ic_product_classroom_48.png'
-            },
-            {
-                id: 3,
-                name: 'TikTok',
-                url: 'https://www.tiktok.com/',
-                emoji: 'https://sf16-website-login.neutral.ttwstatic.com/obj/tiktok_web_login_static/tiktok/webapp/main/webapp-desktop/8152caf0c8e8bc67ae0d.png'
-            },
-            {
-                id: 4,
-                name: 'Spotify',
-                url: 'https://open.spotify.com/',
-                emoji: 'https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png'
-            },
-            {
-                id: 5,
-                name: 'YouTube',
-                url: 'https://www.youtube.com/',
-                emoji: 'https://www.youtube.com/s/desktop/f506bd45/img/favicon_144x144.png'
-            }
-        ];
-
         // Criar estrelas
         function createStars() {
             const starsContainer = document.getElementById('stars');
@@ -712,7 +1133,7 @@
             for (let i = 0; i < numberOfStars; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
-               
+                
                 const size = Math.random() * 2 + 1;
                 star.style.width = size + 'px';
                 star.style.height = size + 'px';
@@ -720,7 +1141,7 @@
                 star.style.top = Math.random() * 100 + '%';
                 star.style.animationDelay = Math.random() * 3 + 's';
                 star.style.animationDuration = (Math.random() * 3 + 2) + 's';
-               
+                
                 starsContainer.appendChild(star);
             }
         }
@@ -728,128 +1149,373 @@
         // Atualizar relógio
         function updateClock() {
             const now = new Date();
-           
+            
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
             const seconds = String(now.getSeconds()).padStart(2, '0');
             document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
-           
+            
             const days = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
             const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-           
+            
             const dayName = days[now.getDay()];
             const day = now.getDate();
             const month = months[now.getMonth()];
-           
+            
             document.getElementById('date').textContent = `${dayName}, ${day} de ${month}`;
         }
-
-        // Modal
-        function openModal() {
-            document.getElementById('modal').classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('modal').classList.remove('active');
-            document.getElementById('linkName').value = '';
-            document.getElementById('linkUrl').value = '';
-            document.getElementById('linkEmoji').value = '';
-        }
-
-        // Adicionar link
-        function addLink() {
-            const name = document.getElementById('linkName').value.trim();
-            const url = document.getElementById('linkUrl').value.trim();
-            const emoji = document.getElementById('linkEmoji').value.trim() || '🔗';
-
-            if (!name || !url) {
-                alert('Por favor, preencha o nome e a URL!');
-                return;
-            }
-
-            try {
-                new URL(url);
-            } catch (e) {
-                alert('Por favor, insira uma URL válida!');
-                return;
-            }
-
-            const link = {
-                id: Date.now(),
-                name: name,
-                url: url,
-                emoji: emoji
-            };
-
-            links.push(link);
-            renderLinks();
-            closeModal();
-        }
-
-        // Remover link
-        function removeLink(id, event) {
-            event.preventDefault();
-            event.stopPropagation();
-           
-            if (confirm('Deseja realmente remover este link?')) {
-                links = links.filter(link => link.id !== id);
-                renderLinks();
-            }
-        }
-
-        // Renderizar links
-        function renderLinks() {
-            const grid = document.getElementById('linksGrid');
-           
-            grid.innerHTML = links.map(link => {
-                const isImage = link.emoji.startsWith('http');
-                const iconContent = isImage
-                    ? `<img src="${escapeHtml(link.emoji)}" alt="${escapeHtml(link.name)}">`
-                    : escapeHtml(link.emoji);
-               
-                return `
-                    <a href="${escapeHtml(link.url)}" target="_blank" class="link-card">
-                        <button class="delete-btn" onclick="removeLink(${link.id}, event)">×</button>
-                        <div class="icon">${iconContent}</div>
-                        <div class="link-name">${escapeHtml(link.name)}</div>
-                    </a>
-                `;
-            }).join('');
-        }
-
-        // Escapar HTML
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        // Fechar modal com ESC
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
-
-        // Fechar modal clicando fora
-        document.getElementById('modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-
-        // Enter para adicionar
-        document.getElementById('linkUrl').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                addLink();
-            }
-        });
 
         // Inicializar
         createStars();
         updateClock();
         setInterval(updateClock, 1000);
-        renderLinks();
+
+        // JOGO INTERATIVO - CAPTURA DE ETs
+        let score = 0;
+        let gameActive = false;
+        let alienSpawnInterval = null;
+        let collisionCheckInterval = null;
+        let fleeCheckInterval = null;
+        const VICTORY_SCORE = 10; // Número de ETs para vitória
+        
+        const playerShip = document.getElementById('playerShip');
+        const captureBeam = document.getElementById('captureBeam');
+        const aliensContainer = document.getElementById('aliensContainer');
+        const scoreValue = document.getElementById('scoreValue');
+        const gameToggle = document.getElementById('gameToggle');
+        const gameToggleText = document.getElementById('gameToggleText');
+        let beamActive = false;
+        let shipX = 0;
+        let shipY = 0;
+
+        // Esconder elementos do jogo inicialmente
+        document.querySelectorAll('.game-element').forEach(el => {
+            el.classList.add('game-hidden');
+        });
+
+        // Toggle do jogo
+        gameToggle.addEventListener('click', () => {
+            gameActive = !gameActive;
+            
+            if (gameActive) {
+                startGame();
+            } else {
+                stopGame();
+            }
+        });
+
+        function startGame() {
+            gameToggleText.textContent = '🛑 Parar Jogo';
+            gameToggle.classList.add('off');
+            
+            // Mostrar elementos do jogo
+            document.querySelectorAll('.game-element').forEach(el => {
+                el.classList.remove('game-hidden');
+            });
+            
+            // Resetar score
+            score = 0;
+            scoreValue.textContent = score;
+            
+            // Criar ETs periodicamente
+            alienSpawnInterval = setInterval(createAlien, 3000);
+            
+            // Verificar colisões
+            collisionCheckInterval = setInterval(checkBeamCollision, 100);
+            
+            // Verificar ETs fugindo
+            fleeCheckInterval = setInterval(makeAliensFlee, 100);
+            
+            // Criar alguns ETs iniciais
+            createAlien();
+            setTimeout(createAlien, 1000);
+            setTimeout(createAlien, 2000);
+        }
+
+        function stopGame() {
+            gameToggleText.textContent = '🎮 Iniciar Jogo';
+            gameToggle.classList.remove('off');
+            
+            // Esconder elementos do jogo
+            document.querySelectorAll('.game-element').forEach(el => {
+                el.classList.add('game-hidden');
+            });
+            
+            // Parar spawns
+            if (alienSpawnInterval) {
+                clearInterval(alienSpawnInterval);
+                alienSpawnInterval = null;
+            }
+            
+            if (collisionCheckInterval) {
+                clearInterval(collisionCheckInterval);
+                collisionCheckInterval = null;
+            }
+            
+            if (fleeCheckInterval) {
+                clearInterval(fleeCheckInterval);
+                fleeCheckInterval = null;
+            }
+            
+            // Remover todos os ETs
+            aliensContainer.innerHTML = '';
+            
+            // Desativar raio
+            beamActive = false;
+            captureBeam.classList.remove('active');
+        }
+
+        // Controlar nave com o mouse
+        document.addEventListener('mousemove', (e) => {
+            if (!gameActive) return;
+            
+            shipX = e.clientX;
+            shipY = e.clientY;
+            playerShip.style.left = (shipX - 40) + 'px';
+            playerShip.style.top = (shipY - 40) + 'px';
+        });
+
+        // Ativar raio de captura com espaço
+        document.addEventListener('keydown', (e) => {
+            if (!gameActive) return;
+            
+            if (e.code === 'Space') {
+                beamActive = true;
+                captureBeam.classList.add('active');
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            if (!gameActive) return;
+            
+            if (e.code === 'Space') {
+                beamActive = false;
+                captureBeam.classList.remove('active');
+            }
+        });
+
+        // Criar ET
+        function createAlien() {
+            if (!gameActive) return;
+            
+            const alien = document.createElement('div');
+            alien.className = 'alien';
+            
+            // Posição aleatória
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 150);
+            alien.style.left = x + 'px';
+            alien.style.top = y + 'px';
+            
+            // Velocidade aleatória de flutuação
+            const duration = 3 + Math.random() * 3;
+            alien.style.animationDuration = duration + 's';
+            
+            alien.innerHTML = `
+                <div class="alien-head">
+                    <div class="alien-eye left"></div>
+                    <div class="alien-eye right"></div>
+                </div>
+                <div class="alien-body"></div>
+                <div class="alien-arm left"></div>
+                <div class="alien-arm right"></div>
+            `;
+            
+            // Clique para capturar
+            alien.addEventListener('click', () => {
+                captureAlien(alien);
+            });
+            
+            aliensContainer.appendChild(alien);
+            
+            // Remover após 15 segundos se não for capturado
+            setTimeout(() => {
+                if (alien.parentElement) {
+                    alien.remove();
+                }
+            }, 15000);
+        }
+
+        // Capturar ET
+        function captureAlien(alien) {
+            if (!gameActive || alien.classList.contains('captured')) return;
+            
+            alien.classList.add('captured');
+            score++;
+            scoreValue.textContent = score;
+            
+            // Verificar vitória
+            if (score >= VICTORY_SCORE) {
+                setTimeout(showVictory, 500);
+            }
+            
+            // Obter posição do ET
+            const alienRect = alien.getBoundingClientRect();
+            const alienX = alienRect.left + alienRect.width / 2;
+            const alienY = alienRect.top + alienRect.height / 2;
+            
+            // FEEDBACK 1: Flash na tela
+            const flash = document.createElement('div');
+            flash.className = 'screen-flash';
+            document.body.appendChild(flash);
+            setTimeout(() => flash.remove(), 300);
+            
+            // FEEDBACK 2: Popup de pontos
+            const popup = document.createElement('div');
+            popup.className = 'point-popup';
+            popup.textContent = '+1 👽';
+            popup.style.left = alienX + 'px';
+            popup.style.top = alienY + 'px';
+            document.body.appendChild(popup);
+            setTimeout(() => popup.remove(), 1000);
+            
+            // FEEDBACK 3: Explosão de partículas
+            for (let i = 0; i < 12; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'capture-particle';
+                particle.style.left = alienX + 'px';
+                particle.style.top = alienY + 'px';
+                
+                const angle = (i / 12) * Math.PI * 2;
+                const distance = 50 + Math.random() * 50;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+                
+                particle.style.setProperty('--tx', tx + 'px');
+                particle.style.setProperty('--ty', ty + 'px');
+                particle.style.animation = `explodeParticle ${0.5 + Math.random() * 0.3}s ease-out forwards`;
+                
+                document.body.appendChild(particle);
+                setTimeout(() => particle.remove(), 800);
+            }
+            
+            // FEEDBACK 4: Nave treme
+            playerShip.classList.add('ship-shake');
+            setTimeout(() => playerShip.classList.remove('ship-shake'), 300);
+            
+            // Som de captura (visual)
+            captureBeam.classList.add('active');
+            setTimeout(() => {
+                if (beamActive) {
+                    captureBeam.classList.add('active');
+                } else {
+                    captureBeam.classList.remove('active');
+                }
+            }, 500);
+            
+            // Remover ET após animação
+            setTimeout(() => {
+                alien.remove();
+            }, 1000);
+        }
+
+        // ETs fogem da nave
+        function makeAliensFlee() {
+            if (!gameActive) return;
+            
+            const aliens = document.querySelectorAll('.alien:not(.captured)');
+            const FLEE_DISTANCE = 150; // Distância para começar a fugir
+            const FLEE_SPEED = 3; // Velocidade de fuga
+            
+            aliens.forEach(alien => {
+                const alienRect = alien.getBoundingClientRect();
+                const alienX = alienRect.left + alienRect.width / 2;
+                const alienY = alienRect.top + alienRect.height / 2;
+                
+                const dx = alienX - shipX;
+                const dy = alienY - shipY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < FLEE_DISTANCE && distance > 0) {
+                    // Calcular direção de fuga
+                    const angle = Math.atan2(dy, dx);
+                    const fleeX = alienX + Math.cos(angle) * FLEE_SPEED;
+                    const fleeY = alienY + Math.sin(angle) * FLEE_SPEED;
+                    
+                    // Manter dentro da tela
+                    const newX = Math.max(50, Math.min(window.innerWidth - 50, fleeX));
+                    const newY = Math.max(50, Math.min(window.innerHeight - 100, fleeY));
+                    
+                    alien.classList.add('fleeing');
+                    alien.style.left = (newX - 25) + 'px';
+                    alien.style.top = (newY - 35) + 'px';
+                } else {
+                    alien.classList.remove('fleeing');
+                }
+            });
+        }
+
+        // Tela de vitória
+        function showVictory() {
+            gameActive = false;
+            
+            // Parar spawns
+            if (alienSpawnInterval) clearInterval(alienSpawnInterval);
+            if (collisionCheckInterval) clearInterval(collisionCheckInterval);
+            if (fleeCheckInterval) clearInterval(fleeCheckInterval);
+            
+            // Criar tela de vitória
+            const victoryScreen = document.createElement('div');
+            victoryScreen.className = 'victory-screen';
+            
+            // Estrelas de fundo
+            const starsContainer = document.createElement('div');
+            starsContainer.className = 'victory-stars';
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'victory-star';
+                const size = 2 + Math.random() * 3;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                starsContainer.appendChild(star);
+            }
+            victoryScreen.appendChild(starsContainer);
+            
+            victoryScreen.innerHTML += `
+                <div class="victory-rocket">🚀</div>
+                <div class="victory-title">🎉 MISSÃO CUMPRIDA! 🎉</div>
+                <div class="victory-message">
+                    Parabéns! Você capturou ${VICTORY_SCORE} ETs!<br>
+                    🛸 Vamos mandar esses carinhas<br>
+                    de volta para seus planetas! 🌍✨
+                </div>
+                <button class="continue-button" onclick="this.parentElement.remove(); stopGame();">
+                    Continuar Explorando 🌌
+                </button>
+            `;
+            
+            document.body.appendChild(victoryScreen);
+        }
+
+        // Verificar colisão com raio
+        function checkBeamCollision() {
+            if (!gameActive || !beamActive) return;
+            
+            const aliens = document.querySelectorAll('.alien:not(.captured)');
+            const shipRect = playerShip.getBoundingClientRect();
+            const beamArea = {
+                left: shipRect.left - 50,
+                right: shipRect.right + 50,
+                top: shipRect.bottom,
+                bottom: shipRect.bottom + 80
+            };
+            
+            aliens.forEach(alien => {
+                const alienRect = alien.getBoundingClientRect();
+                
+                // Verificar se o ET está na área do raio
+                if (alienRect.left < beamArea.right &&
+                    alienRect.right > beamArea.left &&
+                    alienRect.top < beamArea.bottom &&
+                    alienRect.bottom > beamArea.top) {
+                    captureAlien(alien);
+                }
+            });
+        }
     </script>
 </body>
 </html>
